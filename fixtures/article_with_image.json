@@ -1,0 +1,43 @@
+{
+    "item_id": "3575623899",
+    "normal_url": "http://ciokorea.com/news/228924",
+    "resolved_id": "3575623899",
+    "extended_item_id": "3575623899",
+    "resolved_url": "https://www.ciokorea.com/news/228924",
+    "domain_id": "525828",
+    "origin_domain_id": "525828",
+    "response_code": "200",
+    "mime_type": "text/html",
+    "content_length": "22237",
+    "encoding": "utf-8",
+    "date_resolved": "2022-03-17 00:15:34",
+    "date_published": "0000-00-00 00:00:00",
+    "title": "\ub7ec\uc2dc\uc544\uc81c \ubcf4\uc548 \ubc0f IT \uc81c\ud488 \uc0ac\uc6a9\uc744 \uc911\ub2e8\ud574\uc57c \ud558\ub294 \uc774\uc720",
+    "excerpt": "\uc6b0\ud06c\ub77c\uc774\ub098-\ub7ec\uc2dc\uc544 \uc804\uc7c1\uc73c\ub85c \uc778\ud574 \uae30\uc5c5\uc740 \ub7ec\uc2dc\uc544\uc81c \ubcf4\uc548 \ubc0f IT \uc81c\ud488 \uc0ac\uc6a9\uc744 \uc911\ub2e8\ud574\uc57c \ud558\uace0, \uacc4\uc18d \uc0ac\uc6a9\ud558\ub294 \uac83\uc774 \uc65c \uc704\ud5d8\ud55c\uc9c0 \uc758\ubb38\uc744 \uc81c\uae30\ud55c\ub2e4.",
+    "word_count": "830",
+    "innerdomain_redirect": "1",
+    "login_required": "0",
+    "has_image": "1",
+    "has_video": "0",
+    "is_index": "0",
+    "is_article": "1",
+    "used_fallback": "0",
+    "lang": "ko",
+    "time_first_parsed": "1647494134",
+    "authors": [],
+    "images": {
+      "1": {
+        "item_id": "3575623899",
+        "image_id": "1",
+        "src": "https://www.ciokorea.com/files/itworld/ITW_202203_01/GettyImages-507399787.jpg",
+        "width": "620",
+        "height": "414",
+        "credit": "",
+        "caption": ""
+      }
+    },
+    "videos": [],
+    "top_image_url": "https://www.ciokorea.com/files/itworld/ITW_202203_01/GettyImages-507399787.jpg",
+    "resolved_normal_url": "http://ciokorea.com/news/228924",
+    "given_url": "https://www.ciokorea.com/news/228924"
+  }
