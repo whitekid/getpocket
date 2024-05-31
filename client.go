@@ -13,7 +13,7 @@ import (
 	"github.com/pkg/errors"
 	"github.com/whitekid/goxp"
 	"github.com/whitekid/goxp/log"
-	"github.com/whitekid/goxp/request"
+	"github.com/whitekid/goxp/requests"
 )
 
 //go:generate mockery --name Interface
@@ -30,7 +30,7 @@ type Interface interface {
 type clientImpl struct {
 	consumerKey string
 	accessToken string
-	sess        request.Interface // common sessions
+	sess        requests.Interface // common sessions
 }
 
 var _ Interface = (*clientImpl)(nil)
@@ -40,7 +40,7 @@ func New(consumerKey, accessToken string) Interface {
 	return &clientImpl{
 		consumerKey: consumerKey,
 		accessToken: accessToken,
-		sess:        request.NewSession(nil),
+		sess:        requests.NewSession(nil),
 	}
 }
 
@@ -117,12 +117,12 @@ func (a *Article) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-func (c *clientImpl) post(url string) *request.Request {
+func (c *clientImpl) post(url string) *requests.Request {
 	u, _ := gourl.JoinPath("https://getpocket.com/v3", url)
 	return c.sess.Post(u).Header("X-Accept", "application/json")
 }
 
-func (c *clientImpl) sendRequest(ctx context.Context, req *request.Request) (*request.Response, error) {
+func (c *clientImpl) sendRequest(ctx context.Context, req *requests.Request) (*requests.Response, error) {
 	resp, err := req.Do(ctx)
 	if err != nil {
 		return resp, errors.Wrap(err, "request failed")
@@ -149,12 +149,13 @@ func (c *clientImpl) AuthorizedURL(ctx context.Context, redirectURI string) (str
 		return "", "", errors.Wrap(err, "authorized request failed")
 	}
 
-	var response struct {
+	type Response struct {
 		Code string `json:"code"`
 	}
 
 	defer resp.Body.Close()
-	if err := resp.JSON(&response); err != nil {
+	response, err := goxp.ReadJSON[Response](resp.Body)
+	if err != nil {
 		return "", "", errors.Wrap(err, "fail to parse json")
 	}
 
@@ -174,13 +175,14 @@ func (c *clientImpl) NewAccessToken(ctx context.Context, requestToken string) (s
 		return "", "", err
 	}
 
-	var response struct {
+	type Response struct {
 		AccessToken string `json:"access_token"`
 		Username    string `json:"username"`
 	}
 
 	defer resp.Body.Close()
-	if err := resp.JSON(&response); err != nil {
+	response, err := goxp.ReadJSON[Response](resp.Body)
+	if err != nil {
 		return "", "", err
 	}
 
@@ -385,10 +387,9 @@ func (a *addRequestImpl) Do(ctx context.Context) (*AddResponse, error) {
 		return nil, err
 	}
 
-	response := &AddResponse{}
-
 	defer resp.Body.Close()
-	if err := resp.JSON(response); err != nil {
+	response, err := goxp.ReadJSON[AddResponse](resp.Body)
+	if err != nil {
 		return nil, err
 	}
 
@@ -487,9 +488,9 @@ func (r *modifyRequestImpl) Do(ctx context.Context) (*ModifyResponse, error) {
 		return nil, err
 	}
 
-	response := &ModifyResponse{}
 	defer resp.Body.Close()
-	if err := resp.JSON(response); err != nil {
+	response, err := goxp.ReadJSON[ModifyResponse](resp.Body)
+	if err != nil {
 		return nil, err
 	}
 
